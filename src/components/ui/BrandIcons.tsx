@@ -1,7 +1,7 @@
 import type { SVGProps } from "react";
 
 /**
- * Lucide v1 removed brand/trademark glyphs, so the three I need live here.
+ * Lucide v1 removed brand/trademark glyphs, so the ones we need live here.
  * Each renders `aria-hidden` — the consumer must supply the accessible name.
  */
 
@@ -38,6 +38,28 @@ export function LinkedinIcon(props: BrandIconProps) {
       {...props}
       d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11.5H3V9.75Zm7 0h3.83v1.57h.05a4.2 4.2 0 0 1 3.78-2.07c4.04 0 4.79 2.66 4.79 6.12v5.88h-4v-5.21c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75v5.3h-4V9.75Z"
     />
+  );
+}
+
+export function InstagramIcon(props: BrandIconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={props.size ?? 24}
+      height={props.size ?? 24}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+      {...props}
+    >
+      <rect width="20" height="20" x="2" y="2" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
   );
 }
 

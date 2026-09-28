@@ -27,6 +27,16 @@
   --color-ink: #241812;
   --color-ink-soft: #5a463a;
 
+  /* Retro computer: beige plastic body, P1 green phosphor CRT.
+     Verified on the shell/screen fills:
+       phosphor 12.65:1   dim 6.45:1   ink/70 on shell 5.17:1 */
+  --color-crt-shell: #ded1b4;
+  --color-crt-shell-dark: #c4b394;
+  --color-crt-bezel: #2b2723;
+  --color-crt-screen: #0e1a0b;
+  --color-crt-phosphor: #b6e87a;
+  --color-crt-phosphor-dim: #7ba84f;
+
   /* Keylines. 0.18 alpha is only 1.44:1 — too faint, hence 0.55. */
   --color-line: rgb(36 24 18 / 0.55);
   --color-line-soft: rgb(36 24 18 / 0.22);
@@ -162,5 +172,91 @@
   /* Hard underline that reads as a printed rule, not a glow. */
   .rule {
     background-color: var(--color-ink);
+  }
+
+  /* ---- 3D keycap ------------------------------------------------
+     The extrusion is a hard bottom shadow; pressing collapses it. No JS,
+     no blur — matches the rest of the theme. */
+  .keycap {
+    box-shadow:
+      0 4px 0 0 var(--color-ink),
+      0 4px 0 1px var(--color-ink);
+    transform: translateZ(0);
+    transition:
+      transform 90ms steps(2, end),
+      box-shadow 90ms steps(2, end);
+  }
+
+  .keycap:hover:not([aria-disabled="true"]) {
+    transform: translateY(-2px);
+    box-shadow:
+      0 6px 0 0 var(--color-ink),
+      0 6px 0 1px var(--color-ink);
+  }
+
+  /* The cap sinks into the case and the base disappears. */
+  .keycap:active:not([aria-disabled="true"]) {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 0 var(--color-ink);
+  }
+
+  .keycap:disabled,
+  .keycap[aria-disabled="true"] {
+    box-shadow: 0 2px 0 0 var(--color-line-soft);
+  }
+
+  /* ---- Key bank: joined icon keys, no gaps ---------------------- */
+  /* The whole bank sinks together, so it reads as one physical part. */
+  .keycap-bank {
+    transition:
+      transform 90ms steps(2, end),
+      box-shadow 90ms steps(2, end);
+  }
+
+  .keycap-bank:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 0 var(--color-ink);
+  }
+
+  .keycap-bank:has(.keycap-item:active) {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 0 var(--color-ink);
+  }
+
+  .keycap-item {
+    transition: background-color 120ms steps(2, end);
+  }
+
+  .keycap-item:hover {
+    background-color: var(--color-ochre);
+  }
+
+  /* Recessed seam so each key reads as its own cap. */
+  .keycap-item:not(:first-child) {
+    border-left-width: 2px;
+  }
+
+  /* ---- CRT screen ----------------------------------------------- */
+  .crt-screen {
+    background-color: var(--color-crt-screen);
+    /* Barrel-ish vignette from layered insets, no filter cost. */
+    box-shadow:
+      inset 0 0 24px 6px rgb(0 0 0 / 0.55),
+      inset 0 0 60px 12px rgb(0 0 0 / 0.35);
+  }
+
+  /* Horizontal scanlines. */
+  .crt-scan {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgb(0 0 0 / 0.22) 0px,
+      rgb(0 0 0 / 0.22) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+
+  .crt-glow {
+    text-shadow: 0 0 6px rgb(182 232 122 / 0.55);
   }
 }

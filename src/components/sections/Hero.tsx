@@ -1,20 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, MapPin } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Send } from "lucide-react";
 
-import { Button } from "@/components/ui/Button";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
+import { GithubIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
+import { KeyBank, KeyBankItem } from "@/components/ui/KeyBank";
+import { KeyButton } from "@/components/ui/KeyButton";
+import { RetroComputer } from "@/components/sections/RetroComputer";
 import { profile } from "@/data/profile";
 import { stats } from "@/data/stats";
-import { EASE, staggerParent } from "@/lib/motion";
+import { EASE, fade, staggerParent } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
-
-const socials = [
-  { label: "GitHub", href: profile.github, icon: GithubIcon },
-  { label: "LinkedIn", href: profile.linkedin, icon: LinkedinIcon },
-  { label: "Email", href: `mailto:${profile.email}`, icon: Mail },
-];
 
 export function Hero() {
   const reduce = usePrefersReducedMotion();
@@ -89,39 +85,13 @@ export function Hero() {
             database work, and day-to-day IT support.
           </motion.p>
 
-          <motion.div
+          <motion.p
             variants={rise}
-            className="mt-9 flex flex-wrap items-center gap-3"
+            className="mt-7 flex items-center gap-1.5 text-sm text-ink-soft"
           >
-            <Button href="#projects">
-              View Projects
-              <ArrowRight size={16} />
-            </Button>
-            <Button href={profile.github} external variant="outline">
-              <GithubIcon size={16} />
-              GitHub
-            </Button>
-          </motion.div>
-
-          <motion.ul variants={rise} className="mt-9 flex items-center gap-2.5">
-            {socials.map(({ label, href, icon: Icon }) => (
-              <li key={label}>
-                <a
-                  href={href}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={href.startsWith("http") ? "noreferrer noopener" : undefined}
-                  aria-label={label}
-                  className="press grid size-10 place-items-center rounded-[4px] border-2 border-ink bg-card text-ink"
-                >
-                  <Icon size={16} />
-                </a>
-              </li>
-            ))}
-            <li className="ml-2 hidden items-center gap-1.5 text-sm text-ink-soft sm:flex">
-              <MapPin size={14} />
-              {profile.location}
-            </li>
-          </motion.ul>
+            <MapPin size={14} />
+            {profile.location}
+          </motion.p>
 
           <motion.dl
             variants={rise}
@@ -143,43 +113,61 @@ export function Hero() {
           </motion.dl>
         </motion.div>
 
-        {/* Spec card — the one component that keeps the terminal motif. */}
-        <motion.aside
-          initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE, delay: 0.3 }}
-          className="card p-5 shadow-hard sm:p-6"
-        >
-          <div className="flex items-center gap-2 border-b-2 border-ink pb-4">
-            <span aria-hidden="true" className="size-3 bg-rust" />
-            <span aria-hidden="true" className="size-3 bg-ochre" />
-            <span aria-hidden="true" className="size-3 bg-olive" />
-            <span className="ml-1 font-mono text-[0.68rem] text-ink-soft">
-              stack.sh
-            </span>
-          </div>
+        {/* Retro computer + 3D keycap row, right column. */}
+        <div className="flex flex-col items-center">
+          <RetroComputer />
 
-          <dl className="mt-4 space-y-3 font-mono text-[0.8rem]">
-            {[
-              ["frameworks", "Laravel · React · Next.js"],
-              ["languages", "TypeScript · JavaScript · PHP"],
-              ["database", "PostgreSQL · MySQL"],
-              ["tooling", "Git · Postman · Figma"],
-            ].map(([label, value]) => (
-              <div key={label} className="flex flex-wrap gap-x-3">
-                <dt className="w-24 shrink-0 text-rust">
-                  <span className="text-ink-soft">$</span> {label}
-                </dt>
-                <dd className="text-ink">{value}</dd>
-              </div>
-            ))}
-          </dl>
+          <motion.div
+            variants={staggerParent(reduce ? 0 : 0.06)}
+            initial="hidden"
+            animate="show"
+            className="mt-4 flex w-full max-w-[22rem] flex-col items-center gap-3"
+          >
+            <motion.div variants={fade} className="w-full">
+              <KeyButton href="#projects" tone="accent" className="w-full">
+                View Projects
+                <ArrowRight size={16} />
+              </KeyButton>
+            </motion.div>
 
-          <div className="mt-5 flex items-center gap-2 border-t-2 border-ink pt-4 font-mono text-[0.7rem] text-ink-soft">
-            <span aria-hidden="true" className="size-2 bg-olive" />
-            open to new projects
-          </div>
-        </motion.aside>
+            <motion.div variants={fade} className="grid w-full grid-cols-2 gap-2.5">
+              <KeyButton href={profile.github} external ariaLabel="GitHub">
+                <GithubIcon size={16} />
+                GitHub
+              </KeyButton>
+              {/* The second GitHub key is now Instagram. */}
+              <KeyButton href={profile.instagram} external ariaLabel="Instagram">
+                <InstagramIcon size={16} />
+                Instagram
+              </KeyButton>
+            </motion.div>
+
+            {/* Icon keys share one casing: no gaps, identical 1/3 columns,
+                divided by keyline. Reads as a single key bank, not 3 chips. */}
+            <motion.div variants={fade}>
+              <KeyBank>
+                <KeyBankItem
+                  href={profile.linkedin}
+                  external
+                  ariaLabel="LinkedIn"
+                  label="LinkedIn"
+                >
+                  <LinkedinIcon size={18} />
+                </KeyBankItem>
+                <KeyBankItem
+                  href={`mailto:${profile.email}`}
+                  ariaLabel="Email"
+                  label="Email"
+                >
+                  <Mail size={18} />
+                </KeyBankItem>
+                <KeyBankItem href="#contact" ariaLabel="Contact" label="Contact">
+                  <Send size={18} />
+                </KeyBankItem>
+              </KeyBank>
+            </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

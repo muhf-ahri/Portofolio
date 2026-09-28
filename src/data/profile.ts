@@ -23,6 +23,7 @@ export const profile = {
   email: "fahri@example.com",
   github: "https://github.com/fahri",
   linkedin: "https://www.linkedin.com/in/fahri",
+  instagram: "https://instagram.com/fahri",
   website: "https://example.com",
 } as const;
 

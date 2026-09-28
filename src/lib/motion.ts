@@ -11,6 +11,12 @@ export const fadeUp: Variants = {
   show: { opacity: 1, y: 0, transition },
 };
 
+/** Opacity only — for elements that should not travel (buttons, keycaps). */
+export const fade: Variants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: fastTransition },
+};
+
 export const staggerParent = (stagger = 0.08, delay = 0): Variants => ({
   hidden: {},
   show: { transition: { staggerChildren: stagger, delayChildren: delay } },
