@@ -1,26 +1,147 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ==================================================================
+   RETRO PRINT / 70s — design tokens. Single source of truth.
+   Contrast on --color-paper was verified, not eyeballed:
+     ink      14.36:1   rust      5.18:1   olive   6.10:1
+     ink-soft  7.35:1   line      3.68:1
+   --color-ochre is 2.44:1 — decorative fills ONLY, never text.
+================================================================== */
+@theme {
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-work-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, "Courier New", monospace;
+
+  /* Paper & ink */
+  --color-paper: #f2e9da;
+  --color-paper-2: #e9dcc4;
+  --color-card: #fbf6ec;
+
+  /* Accents */
+  --color-rust: #a83e18;
+  --color-rust-bright: #c2542a;
+  --color-ochre: #d9a03c;
+  --color-olive: #4a5c2c;
+  --color-teal: #1f6360;
+
+  --color-ink: #241812;
+  --color-ink-soft: #5a463a;
+
+  /* Keylines. 0.18 alpha is only 1.44:1 — too faint, hence 0.55. */
+  --color-line: rgb(36 24 18 / 0.55);
+  --color-line-soft: rgb(36 24 18 / 0.22);
+
+  /* The signature: hard offset shadow, zero blur. */
+  --shadow-hard-sm: 3px 3px 0 var(--color-ink);
+  --shadow-hard: 4px 4px 0 var(--color-ink);
+  --shadow-hard-lg: 6px 6px 0 var(--color-ink);
+
+  --radius-card: 0.5rem;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  /* Display type: the optical-size axis alone carries most of the 70s feel. */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-variation-settings: "SOFT" 20, "WONK" 1;
+  }
+
+  section[id] {
+    scroll-margin-top: 6.5rem;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-rust);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-ochre);
+    color: var(--color-ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* ---- Print textures (flat, no blur — the point of the theme) ---- */
+
+  /* Halftone dot field, the way cheap 70s print separated tones. */
+  .bg-halftone {
+    background-image: radial-gradient(
+      var(--color-ink) 1.1px,
+      transparent 1.1px
+    );
+    background-size: 6px 6px;
+  }
+
+  /* Paper fibre. Same generated noise, multiplied instead of overlaid. */
+  .bg-fibre {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+
+  /* Flat card: solid fill + solid keyline. No backdrop-filter anywhere. */
+  .card {
+    background-color: var(--color-card);
+    border: 2px solid var(--color-ink);
+    border-radius: var(--radius-card);
+  }
+
+  /* Offset "printed" shadow that collapses on press. */
+  .press {
+    box-shadow: var(--shadow-hard);
+    transition:
+      transform 120ms steps(2, end),
+      box-shadow 120ms steps(2, end);
+  }
+
+  .press:hover {
+    box-shadow: var(--shadow-hard-lg);
+    transform: translate(-2px, -2px);
+  }
+
+  .press:active {
+    box-shadow: none;
+    transform: translate(4px, 4px);
+  }
+
+  /* Hard underline that reads as a printed rule, not a glow. */
+  .rule {
+    background-color: var(--color-ink);
+  }
 }
