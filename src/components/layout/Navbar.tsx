@@ -71,12 +71,11 @@ export function Navbar() {
         >
           <a
             href="#home"
-            className="group flex items-center gap-2.5 text-sm font-semibold tracking-tight"
+            className="flex items-center font-semibold tracking-tight"
           >
-            <span className="grid size-8 place-items-center rounded-[4px] border-2 border-ink bg-ochre font-mono text-[0.7rem] text-ink transition-transform duration-150 group-hover:-rotate-3">
-              {profile.initials}
+            <span className="font-display text-lg leading-none font-bold tracking-tight text-ink">
+              {profile.name}
             </span>
-            <span className="text-ink">{profile.name}</span>
           </a>
 
           <ul className="hidden items-center gap-1 md:flex">

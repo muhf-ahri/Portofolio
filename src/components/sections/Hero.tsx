@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, Mail, MapPin } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
@@ -8,6 +8,7 @@ import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
 import { profile } from "@/data/profile";
 import { stats } from "@/data/stats";
 import { EASE, staggerParent } from "@/lib/motion";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 const socials = [
   { label: "GitHub", href: profile.github, icon: GithubIcon },
@@ -16,7 +17,7 @@ const socials = [
 ];
 
 export function Hero() {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
 
   // Framer Motion animates in JS, so the global CSS reduced-motion reset does
   // not cover it — drop the travel and the stagger here as well.

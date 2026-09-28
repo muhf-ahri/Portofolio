@@ -1,10 +1,11 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 
 import { cx } from "@/lib/cx";
 import { EASE, viewportOnce } from "@/lib/motion";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 type RevealProps = {
   children: ReactNode;
@@ -26,7 +27,7 @@ export function Reveal({
   className,
   as = "div",
 }: RevealProps) {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const Component = motion[as];
 
   return (

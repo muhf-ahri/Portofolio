@@ -109,6 +109,25 @@
     background-size: 6px 6px;
   }
 
+  /* Same dots, faded top and bottom so the band has no visible edge —
+     otherwise it reads as a hard horizontal seam across the screen. */
+  .bg-halftone-soft {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      #000 30%,
+      #000 70%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      #000 30%,
+      #000 70%,
+      transparent
+    );
+  }
+
   /* Paper fibre. Same generated noise, multiplied instead of overlaid. */
   .bg-fibre {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");

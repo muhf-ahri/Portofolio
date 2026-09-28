@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { Card } from "@/components/ui/Card";
 import { Reveal } from "@/components/ui/Reveal";
@@ -8,9 +8,10 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionShell } from "@/components/ui/SectionShell";
 import { skillGroups } from "@/data/skills";
 import { fadeUp, staggerParent, viewportOnce } from "@/lib/motion";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 export function Skills() {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
 
   return (
     <SectionShell id="skills">

@@ -4,8 +4,6 @@
  */
 export const profile = {
   name: "Fahri Muhammadani",
-  shortName: "Fahri",
-  initials: "FM",
   role: "Software Engineering Student & Web Developer",
   tagline:
     "Building practical, user-focused web applications with modern technologies.",
