@@ -134,10 +134,9 @@ export function Hero() {
                 <GithubIcon size={16} />
                 GitHub
               </KeyButton>
-              {/* The second GitHub key is now Instagram. */}
-              <KeyButton href={profile.instagram} external ariaLabel="Instagram">
-                <InstagramIcon size={16} />
-                Instagram
+              <KeyButton href="#contact" ariaLabel="Contact">
+                <Send size={16} />
+                Contact
               </KeyButton>
             </motion.div>
 
@@ -161,8 +160,14 @@ export function Hero() {
               >
                 <Mail size={18} />
               </KeyButton>
-              <KeyButton href="#contact" iconOnly ariaLabel="Contact" title="Contact">
-                <Send size={18} />
+              <KeyButton
+                href={profile.instagram}
+                external
+                iconOnly
+                ariaLabel="Instagram"
+                title="Instagram"
+              >
+                <InstagramIcon size={18} />
               </KeyButton>
             </motion.div>
           </motion.div>
