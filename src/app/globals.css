@@ -205,37 +205,6 @@
     box-shadow: 0 2px 0 0 var(--color-line-soft);
   }
 
-  /* ---- Key bank: joined icon keys, no gaps ---------------------- */
-  /* The whole bank sinks together, so it reads as one physical part. */
-  .keycap-bank {
-    transition:
-      transform 90ms steps(2, end),
-      box-shadow 90ms steps(2, end);
-  }
-
-  .keycap-bank:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 0 0 var(--color-ink);
-  }
-
-  .keycap-bank:has(.keycap-item:active) {
-    transform: translateY(4px);
-    box-shadow: 0 0 0 0 var(--color-ink);
-  }
-
-  .keycap-item {
-    transition: background-color 120ms steps(2, end);
-  }
-
-  .keycap-item:hover {
-    background-color: var(--color-ochre);
-  }
-
-  /* Recessed seam so each key reads as its own cap. */
-  .keycap-item:not(:first-child) {
-    border-left-width: 2px;
-  }
-
   /* ---- CRT screen ----------------------------------------------- */
   .crt-screen {
     background-color: var(--color-crt-screen);

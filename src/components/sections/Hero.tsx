@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { ArrowRight, Mail, MapPin, Send } from "lucide-react";
 
 import { GithubIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
-import { KeyBank, KeyBankItem } from "@/components/ui/KeyBank";
 import { KeyButton } from "@/components/ui/KeyButton";
 import { RetroComputer } from "@/components/sections/RetroComputer";
 import { profile } from "@/data/profile";
@@ -142,29 +141,29 @@ export function Hero() {
               </KeyButton>
             </motion.div>
 
-            {/* Icon keys share one casing: no gaps, identical 1/3 columns,
-                divided by keyline. Reads as a single key bank, not 3 chips. */}
-            <motion.div variants={fade}>
-              <KeyBank>
-                <KeyBankItem
-                  href={profile.linkedin}
-                  external
-                  ariaLabel="LinkedIn"
-                  label="LinkedIn"
-                >
-                  <LinkedinIcon size={18} />
-                </KeyBankItem>
-                <KeyBankItem
-                  href={`mailto:${profile.email}`}
-                  ariaLabel="Email"
-                  label="Email"
-                >
-                  <Mail size={18} />
-                </KeyBankItem>
-                <KeyBankItem href="#contact" ariaLabel="Contact" label="Contact">
-                  <Send size={18} />
-                </KeyBankItem>
-              </KeyBank>
+            {/* Icon keys: equal thirds, equal gaps, equal height. The grid
+                does the aligning — no manual widths to keep in sync. */}
+            <motion.div variants={fade} className="grid w-full grid-cols-3 gap-3">
+              <KeyButton
+                href={profile.linkedin}
+                external
+                iconOnly
+                ariaLabel="LinkedIn"
+                title="LinkedIn"
+              >
+                <LinkedinIcon size={18} />
+              </KeyButton>
+              <KeyButton
+                href={`mailto:${profile.email}`}
+                iconOnly
+                ariaLabel="Email"
+                title="Email"
+              >
+                <Mail size={18} />
+              </KeyButton>
+              <KeyButton href="#contact" iconOnly ariaLabel="Contact" title="Contact">
+                <Send size={18} />
+              </KeyButton>
             </motion.div>
           </motion.div>
         </div>

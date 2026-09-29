@@ -5,13 +5,19 @@ import { cx } from "@/lib/cx";
 type KeyButtonProps = {
   href: string;
   children: ReactNode;
-  /** Keycap colour. `accent` is the rust block, `plain` the cream one. */
+  /** Keycap colour. `accent` is the ochre block, `plain` the cream one. */
   tone?: "plain" | "accent";
-  /** Icon-only key: square, centred. */
+  /**
+   * No visible text, so `ariaLabel` is required. Height stays fixed while
+   * width follows the parent — a `size-*` here would refuse to fill a grid
+   * column, which is what keeps icon keys aligned with each other.
+   */
   iconOnly?: boolean;
   className?: string;
   external?: boolean;
   ariaLabel?: string;
+  /** Tooltip for sighted mouse users. Worth setting on `iconOnly` keys. */
+  title?: string;
 };
 
 const tones = {
@@ -22,8 +28,6 @@ const tones = {
 /**
  * A 3D keycap. The extrusion is a hard bottom shadow that collapses on
  * press — see `.keycap` in globals.css. No JavaScript, no blur.
- *
- * `aria-label` is required for `iconOnly`, since the glyph is decorative.
  */
 export function KeyButton({
   href,
@@ -33,6 +37,7 @@ export function KeyButton({
   className,
   external = false,
   ariaLabel,
+  title,
 }: KeyButtonProps) {
   return (
     <a
@@ -40,9 +45,10 @@ export function KeyButton({
       target={external ? "_blank" : undefined}
       rel={external ? "noreferrer noopener" : undefined}
       aria-label={iconOnly ? ariaLabel : undefined}
+      title={title}
       className={cx(
         "keycap inline-flex items-center justify-center rounded-[4px] border-2 border-ink",
-        iconOnly ? "size-11 shrink-0" : "gap-2 px-5 py-3 text-sm font-semibold",
+        iconOnly ? "h-14 w-full" : "gap-2 px-5 py-3 text-sm font-semibold",
         tones[tone],
         className,
       )}
