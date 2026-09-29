@@ -1,8 +1,13 @@
 "use client";
 
 import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
+import { ArrowRight, Mail, Send } from "lucide-react";
 import type { CSSProperties, ReactNode } from "react";
 import { useRef } from "react";
+
+import { GithubIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
+import { profile } from "@/data/profile";
+import { cx } from "@/lib/cx";
 
 /**
  * Beige all-in-one retro computer (monitor + wedge keyboard base),
@@ -23,15 +28,18 @@ const W = 352; // width of monitor and base (same as the w-[22rem] wrapper)
 const H = 250; // monitor height
 const D = 130; // monitor / base depth behind the front plane
 
-const DF = 80; // how far the base juts forward of the monitor
-const DROP = 52; // vertical drop of the keyboard slope over DF
+const DF = 68; // how far the base juts forward of the monitor
+const DROP = 100; // vertical drop of the keyboard slope over DF
 const LIP = 26; // vertical front lip under the keyboard
 const HB = DROP + LIP; // base height
-const SLOPE_L = Math.hypot(DF, DROP); // length of the slanted keyboard deck
-const SLOPE_DEG = (Math.atan2(DF, DROP) * 180) / Math.PI;
+// Rounded: React serialises inline styles to a shorter decimal form on the
+// server, so a raw float here is a guaranteed hydration mismatch.
+const SLOPE_L = Math.round(Math.hypot(DF, DROP));
+const SLOPE_DEG = Math.round((Math.atan2(DF, DROP) * 180) / Math.PI * 10) / 10;
 
 const TOTAL_H = H + HB;
 const PIVOT_Z = -(D - DF) / 2; // middle of the whole depth (+DF ... -D)
+const WEDGE_TOP = Math.round((DROP / HB) * 1000) / 10; // % down the side face
 
 const STACK = [
   ["frameworks", "Laravel · React · Next.js"],
@@ -125,25 +133,63 @@ function Box({ w, h, d, y = 0, top = true, rightStyle, children }: BoxProps) {
   );
 }
 
-const KEY_ROWS = [12, 12, 11, 10] as const;
-const key =
-  "h-[13px] flex-1 rounded-[2px] border border-ink/55 bg-crt-shell shadow-[0_2px_0_var(--color-crt-shell-dark)]";
+const NAV_KEYS = [
+  { href: "#projects", label: "Projects", icon: <ArrowRight size={12} />, accent: true },
+  { href: profile.github, label: "GitHub", icon: <GithubIcon size={12} />, external: true },
+  { href: "#contact", label: "Contact", icon: <Send size={12} /> },
+  { href: profile.linkedin, label: "LinkedIn", icon: <LinkedinIcon size={12} />, external: true },
+  { href: `mailto:${profile.email}`, label: "Email", icon: <Mail size={12} /> },
+  { href: profile.instagram, label: "Instagram", icon: <InstagramIcon size={12} />, external: true },
+] as const;
 
+/**
+ * A real keycap: the site's navigation lives in the keyboard, not under it.
+ * `w-full h-full` inside a fixed grid cell is what keeps every cap identical
+ * regardless of label length — no per-row truncation, no ragged widths.
+ */
+function NavKey({
+  href,
+  label,
+  icon,
+  accent,
+  external,
+}: {
+  href: string;
+  label: string;
+  icon: ReactNode;
+  accent?: boolean;
+  external?: boolean;
+}) {
+  return (
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noreferrer noopener" : undefined}
+      title={label}
+      className={cx(
+        "keycap flex h-full w-full items-center justify-center gap-1.5 rounded-[4px] border-2 border-ink px-1",
+        "font-mono text-[0.5rem] leading-none font-semibold tracking-[0.05em] whitespace-nowrap uppercase",
+        "shadow-[inset_0_1.5px_0_rgba(255,255,255,0.55),0_2px_0_var(--color-crt-shell-dark)]",
+        accent ? "bg-ochre" : "bg-crt-shell",
+      )}
+    >
+      {icon}
+      <span className="truncate">{label}</span>
+    </a>
+  );
+}
+
+/**
+ * Keyboard deck: exactly the six nav keys, laid out as an even 3x2 grid so
+ * every cap shares the same width and height. No decorative filler keys —
+ * they read as noise and this way the whole deck is real navigation.
+ */
 function Keyboard() {
   return (
-    <div className="absolute inset-x-4 top-2.5 flex flex-col gap-[4px]">
-      {KEY_ROWS.map((count, row) => (
-        <div key={row} className="flex gap-[3px]" style={{ paddingLeft: row * 5, paddingRight: row * 3 }}>
-          {Array.from({ length: count }, (_, i) => (
-            <span key={i} className={key} />
-          ))}
-        </div>
+    <div className="absolute inset-3 grid grid-cols-3 grid-rows-2 gap-2">
+      {NAV_KEYS.map((k) => (
+        <NavKey key={k.label} {...k} />
       ))}
-      <div className="flex gap-[3px] px-6">
-        <span className={`${key} flex-[1.5]`} />
-        <span className={`${key} flex-[7]`} />
-        <span className={`${key} flex-[1.5]`} />
-      </div>
     </div>
   );
 }
@@ -221,7 +267,7 @@ export function RetroComputer() {
             backgroundImage: shade(0.14),
             transformOrigin: "left center",
             transform: "rotateY(-90deg)",
-            clipPath: `polygon(0 0, 100% ${(DROP / HB) * 100}%, 100% 100%, 0 100%)`,
+            clipPath: `polygon(0 0, 100% ${WEDGE_TOP}%, 100% 100%, 0 100%)`,
           }}
         />
 

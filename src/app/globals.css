@@ -179,6 +179,7 @@
      no blur — matches the rest of the theme. */
   .keycap {
     box-shadow:
+      inset 0 1.5px 0 rgb(255 255 255 / 0.55),
       0 4px 0 0 var(--color-ink),
       0 4px 0 1px var(--color-ink);
     transform: translateZ(0);
@@ -190,6 +191,7 @@
   .keycap:hover:not([aria-disabled="true"]) {
     transform: translateY(-2px);
     box-shadow:
+      inset 0 1.5px 0 rgb(255 255 255 / 0.7),
       0 6px 0 0 var(--color-ink),
       0 6px 0 1px var(--color-ink);
   }
@@ -197,7 +199,7 @@
   /* The cap sinks into the case and the base disappears. */
   .keycap:active:not([aria-disabled="true"]) {
     transform: translateY(4px);
-    box-shadow: 0 0 0 0 var(--color-ink);
+    box-shadow: inset 0 1.5px 0 rgb(0 0 0 / 0.12);
   }
 
   .keycap:disabled,

@@ -1,14 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, MapPin, Send } from "lucide-react";
+import { MapPin } from "lucide-react";
 
-import { GithubIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
-import { KeyButton } from "@/components/ui/KeyButton";
 import { RetroComputer } from "@/components/sections/RetroComputer";
 import { profile } from "@/data/profile";
 import { stats } from "@/data/stats";
-import { EASE, fade, staggerParent } from "@/lib/motion";
+import { EASE, staggerParent } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 export function Hero() {
@@ -112,65 +110,10 @@ export function Hero() {
           </motion.dl>
         </motion.div>
 
-        {/* Retro computer + 3D keycap row, right column. */}
+        {/* Retro computer. Its keyboard is the hero navigation — no separate
+            button stack underneath. */}
         <div className="flex flex-col items-center">
           <RetroComputer />
-
-          <motion.div
-            variants={staggerParent(reduce ? 0 : 0.06)}
-            initial="hidden"
-            animate="show"
-            className="mt-4 flex w-full max-w-[22rem] flex-col items-center gap-3"
-          >
-            <motion.div variants={fade} className="w-full">
-              <KeyButton href="#projects" tone="accent" className="w-full">
-                View Projects
-                <ArrowRight size={16} />
-              </KeyButton>
-            </motion.div>
-
-            <motion.div variants={fade} className="grid w-full grid-cols-2 gap-2.5">
-              <KeyButton href={profile.github} external ariaLabel="GitHub">
-                <GithubIcon size={16} />
-                GitHub
-              </KeyButton>
-              <KeyButton href="#contact" ariaLabel="Contact">
-                <Send size={16} />
-                Contact
-              </KeyButton>
-            </motion.div>
-
-            {/* Icon keys: equal thirds, equal gaps, equal height. The grid
-                does the aligning — no manual widths to keep in sync. */}
-            <motion.div variants={fade} className="grid w-full grid-cols-3 gap-3">
-              <KeyButton
-                href={profile.linkedin}
-                external
-                iconOnly
-                ariaLabel="LinkedIn"
-                title="LinkedIn"
-              >
-                <LinkedinIcon size={18} />
-              </KeyButton>
-              <KeyButton
-                href={`mailto:${profile.email}`}
-                iconOnly
-                ariaLabel="Email"
-                title="Email"
-              >
-                <Mail size={18} />
-              </KeyButton>
-              <KeyButton
-                href={profile.instagram}
-                external
-                iconOnly
-                ariaLabel="Instagram"
-                title="Instagram"
-              >
-                <InstagramIcon size={18} />
-              </KeyButton>
-            </motion.div>
-          </motion.div>
         </div>
       </div>
     </section>
