@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
 
 import DecryptedText from "@/components/ui/DecryptedText";
+import CountUp from "@/components/ui/CountUp";
 import Shuffle from "@/components/ui/Shuffle";
 import { RetroComputer } from "@/components/sections/RetroComputer";
 import { profile } from "@/data/profile";
@@ -119,8 +120,13 @@ export function Hero() {
                 <dt className="order-2 mt-1.5 text-[0.7rem] leading-tight text-ink-soft">
                   {label}
                 </dt>
-                <dd className="order-1 font-display text-2xl leading-none font-bold tracking-tight text-rust sm:text-3xl">
-                  {value}
+                <dd className="order-1 leading-none">
+                  <CountUp
+                    to={value}
+                    duration={1.4}
+                    minIntegerDigits={2}
+                    className="font-display text-2xl font-bold tracking-tight text-rust sm:text-3xl"
+                  />
                 </dd>
               </div>
             ))}

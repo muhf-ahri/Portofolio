@@ -249,4 +249,14 @@
     text-align: center;
     line-height: inherit;
   }
+
+  /* ---- TextType (React Bits) ---- */
+  .text-type {
+    display: inline-block;
+  }
+
+  .text-type__cursor {
+    display: inline-block;
+    opacity: 1;
+  }
 }

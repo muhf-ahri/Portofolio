@@ -6,6 +6,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { useRef } from "react";
 
 import { GithubIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
+import TextType from "@/components/ui/TextType";
 import { profile } from "@/data/profile";
 import { cx } from "@/lib/cx";
 
@@ -41,12 +42,25 @@ const TOTAL_H = H + HB;
 const PIVOT_Z = -(D - DF) / 2; // middle of the whole depth (+DF ... -D)
 const WEDGE_TOP = Math.round((DROP / HB) * 1000) / 10; // % down the side face
 
-const STACK = [
-  ["Framework", "Laravel · React · Next.js"],
-  ["Language", "TypeScript · JavaScript · PHP"],
-  ["Database", "PostgreSQL · MySQL"],
-  ["Tools", "Git · Postman · Figma"],
-] as const;
+// Pre-built lines the terminal types, one after another: each category label
+// first, then its indented stack on the next line, ending with `ready`.
+const STACK_LINES = [
+  "guest@fahri:~$ ./stack.sh",
+  "",
+  "* FrameWork:",
+  "  Laravel, React, Next.js, Tailwind CSS, Bootstrap",
+  "",
+  "* Language:",
+  "  TypeScript, JavaScript, PHP, Python, CSS, Java",
+  "",
+  "* Database:",
+  "  PostgreSQL, MySQL, MongoDB",
+  "",
+  "* Tools:",
+  "  Git, Postman, Figma, XAMPP, Laragon, Docker",
+  "",
+  "ready",
+];
 
 // Negative X = camera above the object (top face visible).
 // Negative Y = front turned left (right side face visible).
@@ -328,24 +342,17 @@ export function RetroComputer() {
                 style={{ boxShadow: "inset 0 0 26px rgba(0,0,0,0.7)" }}
               >
                 <div className="absolute inset-0 flex flex-col p-3.5 font-mono text-[0.58rem] leading-snug">
-                  <p className="crt-glow text-crt-phosphor-dim">guest@fahri:~$ ./stack.sh</p>
-
-                  <dl className="mt-2 space-y-1.5">
-                    {STACK.map(([label, value]) => (
-                      <div key={label}>
-                        <dt className="text-crt-phosphor-dim">{label}</dt>
-                        <dd className="crt-glow pl-2 text-crt-phosphor">{value}</dd>
-                      </div>
-                    ))}
-                  </dl>
-
-                  <p className="crt-glow mt-auto flex items-center text-crt-phosphor">
-                    ready
-                    <span
-                      aria-hidden="true"
-                      className="ml-1 inline-block h-3 w-1.5 animate-pulse bg-crt-phosphor"
-                    />
-                  </p>
+                  <TextType
+                    text={STACK_LINES}
+                    loop
+                    typingSpeed={10}
+                    pauseDuration={4000}
+                    initialDelay={600}
+                    showCursor
+                    cursorCharacter="█"
+                    cursorClassName="text-crt-phosphor"
+                    className="crt-glow flex-1 text-crt-phosphor"
+                  />
                 </div>
 
                 <div aria-hidden="true" className="crt-scan absolute inset-0" />
