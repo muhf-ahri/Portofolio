@@ -11,24 +11,24 @@ export type Achievement = {
 
 export const achievements: Achievement[] = [
   {
-    title: "Lomba & Project Development",
+    title: "Lomba & Pengembangan Proyek",
     description:
-      "Participated in competitions and project development activities at Universitas Komputer Indonesia.",
+      "Berpartisipasi dalam kompetisi dan kegiatan pengembangan proyek di Universitas Komputer Indonesia.",
     meta: "Universitas Komputer Indonesia",
     icon: Award,
   },
   {
-    title: "Marketplace Frontend Project",
+    title: "Proyek Frontend Marketplace",
     description:
-      "Developed a marketplace website as a frontend project, covering listing, discovery, and responsive UI.",
-    meta: "Frontend Project",
+      "Mengembangkan website marketplace sebagai proyek frontend, mencakup listing, pencarian, dan UI responsif.",
+    meta: "Proyek Frontend",
     icon: ShoppingBag,
   },
   {
     title: "PKL — IT Support & Web Development",
     description:
-      "Completed a field internship combining IT support work with internal web application development.",
-    meta: "PKL Experience",
+      "Menyelesaikan magang lapangan yang menggabungkan pekerjaan dukungan IT dengan pengembangan aplikasi web internal.",
+    meta: "Pengalaman PKL",
     icon: Wrench,
   },
 ];

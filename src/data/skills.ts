@@ -25,8 +25,8 @@ export type SkillGroup = { title: string; caption: string; items: Skill[] };
 
 export const skillGroups: SkillGroup[] = [
   {
-    title: "Web Development",
-    caption: "Interfaces and the systems behind them",
+    title: "Pengembangan Web",
+    caption: "Antarmuka dan sistem di baliknya",
     items: [
       { name: "Laravel", icon: Code2 },
       { name: "React.js", icon: Atom },
@@ -39,24 +39,24 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: "Database",
-    caption: "Relational modelling and query design",
+    caption: "Pemodelan relasional dan desain query",
     items: [
       { name: "PostgreSQL", icon: Database },
       { name: "MySQL", icon: Database },
     ],
   },
   {
-    title: "IT Support",
-    caption: "Keeping the office running",
+    title: "Dukungan IT",
+    caption: "Menjaga operasional kantor tetap berjalan",
     items: [
-      { name: "Hardware & Software Troubleshooting", icon: Wrench },
-      { name: "Network Configuration", icon: Cable },
-      { name: "Computer Maintenance", icon: Hammer },
+      { name: "Troubleshooting Hardware & Software", icon: Wrench },
+      { name: "Konfigurasi Jaringan", icon: Cable },
+      { name: "Perawatan Komputer", icon: Hammer },
     ],
   },
   {
-    title: "Tools",
-    caption: "Daily driver workflow",
+    title: "Perangkat Kerja",
+    caption: "Alur kerja harian",
     items: [
       { name: "Git", icon: GitBranch },
       { name: "GitHub", icon: GithubIcon },
@@ -66,14 +66,14 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "Ways of working",
-    caption: "How I operate on a team",
+    title: "Cara Bekerja",
+    caption: "Bagaimana saya beroperasi dalam tim",
     items: [
-      { name: "AI-Assisted Development", icon: Bot },
-      { name: "Problem Solving", icon: BrainCircuit },
-      { name: "Communication", icon: MessagesSquare },
-      { name: "Teamwork", icon: Users },
-      { name: "Time Management", icon: CalendarCheck },
+      { name: "Pengembangan Berbantuan AI", icon: Bot },
+      { name: "Pemecahan Masalah", icon: BrainCircuit },
+      { name: "Komunikasi", icon: MessagesSquare },
+      { name: "Kerja Sama Tim", icon: Users },
+      { name: "Manajemen Waktu", icon: CalendarCheck },
     ],
   },
 ];

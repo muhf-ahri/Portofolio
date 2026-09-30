@@ -17,9 +17,9 @@ export function Skills() {
     <SectionShell id="skills">
       <SectionHeading
         id="skills-heading"
-        eyebrow="Tech Stack"
-        title="The tools I reach for"
-        description="A working set, grouped by what it is actually for — not a list of logos."
+        eyebrow="Teknologi"
+        title="Perangkat yang Saya Gunakan"
+        description="Satu set yang terpakai, dikelompokkan berdasarkan fungsinya — bukan sekadar daftar logo."
       />
 
       <div className="mt-12 grid gap-4 sm:mt-16 lg:grid-cols-2">

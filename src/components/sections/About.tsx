@@ -10,25 +10,25 @@ const highlights = [
   {
     title: "Software Engineering",
     description:
-      "Reading requirements, breaking them down, and shipping maintainable code.",
+      "Membaca kebutuhan, memecahnya, dan mengirimkan kode yang mudah dipelihara.",
     icon: Code2,
   },
   {
-    title: "Web Development",
+    title: "Pengembangan Web",
     description:
-      "Full-stack web applications built with Laravel, React, and Next.js.",
+      "Aplikasi web full-stack yang dibangun dengan Laravel, React, dan Next.js.",
     icon: MonitorSmartphone,
   },
   {
-    title: "IT Support",
+    title: "Dukungan IT",
     description:
-      "Troubleshooting hardware, software, networks, and day-to-day office tooling.",
+      "Memperbaiki hardware, software, jaringan, dan perkakas kantor sehari-hari.",
     icon: Wrench,
   },
   {
-    title: "Problem Solving",
+    title: "Pemecahan Masalah",
     description:
-      "Turning ambiguous problems into clear, testable, documented solutions.",
+      "Mengubah masalah yang ambigu menjadi solusi yang jelas, teruji, dan terdokumentasi.",
     icon: BrainCircuit,
   },
 ];
@@ -38,8 +38,8 @@ export function About() {
     <SectionShell id="about">
       <SectionHeading
         id="about-heading"
-        eyebrow="About"
-        title="About Me"
+        eyebrow="Tentang"
+        title="Tentang Saya"
         description={profile.about}
       />
 
@@ -62,7 +62,7 @@ export function About() {
       <Reveal delay={0.1} className="mt-4">
         <Card className="flex flex-col gap-6 p-6 sm:p-8">
           <h3 className="font-mono text-[0.7rem] tracking-[0.24em] text-rust uppercase">
-            Focus areas
+            Bidang Fokus
           </h3>
           <ul className="grid gap-x-10 gap-y-3 sm:grid-cols-2">
             {profile.focusAreas.map((area) => (

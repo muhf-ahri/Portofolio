@@ -11,9 +11,9 @@ export function Experience() {
     <SectionShell id="experience">
       <SectionHeading
         id="experience-heading"
-        eyebrow="Experience"
-        title="Where I have worked"
-        description="Internship experience combining IT support operations with internal web application development."
+        eyebrow="Pengalaman"
+        title="Di Mana Saya Bekerja"
+        description="Pengalaman magang yang menggabungkan operasional dukungan IT dengan pengembangan aplikasi web internal."
       />
 
       <ol className="relative mt-12 space-y-5 sm:mt-16">

@@ -9,20 +9,20 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   {
-    role: "IT Support / Web Developer Intern",
+    role: "Intern IT Support / Web Developer",
     company: "PT Pindad Enjiniring Indonesia",
-    period: "PKL Internship",
-    mode: "On-site",
+    period: "PKL (Magang)",
+    mode: "Di Kantor",
     summary:
-      "Supported day-to-day IT needs while developing and maintaining internal applications used by company staff.",
+      "Mendukung kebutuhan IT sehari-hari sambil mengembangkan dan memelihara aplikasi internal yang dipakai oleh staf perusahaan.",
     highlights: [
-      "Supported internal IT needs throughout the PKL program.",
-      "Developed and modified internal applications.",
-      "Built the Internal Control System (Sistem Pengawasan Internal / SPI).",
-      "Troubleshot hardware and software issues.",
-      "Configured network infrastructure and printers.",
-      "Supported meeting preparation using Zoom.",
-      "Deployed and hosted internal applications so employees could access them.",
+      "Mendukung kebutuhan IT internal selama program PKL.",
+      "Mengembangkan dan memodifikasi aplikasi internal.",
+      "Membangun Sistem Pengawasan Internal (SPI).",
+      "Memperbaiki masalah hardware dan software.",
+      "Mengonfigurasi infrastruktur jaringan dan printer.",
+      "Mendukung persiapan rapat menggunakan Zoom.",
+      "Men-deploy dan menghosting aplikasi internal agar dapat diakses karyawan.",
     ],
   },
 ];

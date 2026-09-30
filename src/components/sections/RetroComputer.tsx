@@ -42,10 +42,10 @@ const PIVOT_Z = -(D - DF) / 2; // middle of the whole depth (+DF ... -D)
 const WEDGE_TOP = Math.round((DROP / HB) * 1000) / 10; // % down the side face
 
 const STACK = [
-  ["frameworks", "Laravel · React · Next.js"],
-  ["languages", "TypeScript · JavaScript · PHP"],
-  ["database", "PostgreSQL · MySQL"],
-  ["tooling", "Git · Postman · Figma"],
+  ["Framework", "Laravel · React · Next.js"],
+  ["Language", "TypeScript · JavaScript · PHP"],
+  ["Database", "PostgreSQL · MySQL"],
+  ["Tools", "Git · Postman · Figma"],
 ] as const;
 
 // Negative X = camera above the object (top face visible).
@@ -134,9 +134,9 @@ function Box({ w, h, d, y = 0, top = true, rightStyle, children }: BoxProps) {
 }
 
 const NAV_KEYS = [
-  { href: "#projects", label: "Projects", icon: <ArrowRight size={12} />, accent: true },
+  { href: "#projects", label: "Proyek", icon: <ArrowRight size={12} />, accent: true },
   { href: profile.github, label: "GitHub", icon: <GithubIcon size={12} />, external: true },
-  { href: "#contact", label: "Contact", icon: <Send size={12} /> },
+  { href: "#contact", label: "Kontak", icon: <Send size={12} /> },
   { href: profile.linkedin, label: "LinkedIn", icon: <LinkedinIcon size={12} />, external: true },
   { href: `mailto:${profile.email}`, label: "Email", icon: <Mail size={12} /> },
   { href: profile.instagram, label: "Instagram", icon: <InstagramIcon size={12} />, external: true },

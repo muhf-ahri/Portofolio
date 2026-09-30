@@ -31,7 +31,7 @@ const spaceMono = Space_Mono({
 });
 
 const description =
-  "Portfolio of Fahri Muhammadani — Software Engineering Student and Web Developer building practical, user-focused web applications with Laravel, React, Next.js, and TypeScript.";
+  "Portofolio Fahri Muhammadani — Full-Stack Web Developer yang membangun aplikasi web praktis dan berfokus pada pengguna dengan Laravel, React, Next.js, dan TypeScript.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.website),
@@ -44,11 +44,12 @@ export const metadata: Metadata = {
     "Fahri Muhammadani",
     "Software Engineering Student",
     "Web Developer",
+    "Full-Stack Developer",
     "Laravel Developer",
     "React Developer",
     "Next.js",
     "TypeScript",
-    "Portfolio",
+    "Portofolio",
   ],
   authors: [{ name: profile.name, url: profile.github }],
   creator: profile.name,
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
     title: `${profile.name} — ${profile.role}`,
     description,
     siteName: profile.name,
-    locale: "en_US",
+    locale: "id_ID",
   },
   twitter: {
     card: "summary_large_image",
@@ -75,7 +76,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="id"
       className={`${fraunces.variable} ${workSans.variable} ${spaceMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
@@ -83,7 +84,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-60 focus:border-2 focus:border-ink focus:bg-card focus:px-4 focus:py-2 focus:text-sm focus:shadow-hard"
         >
-          Skip to content
+          Lewati ke konten
         </a>
 
         <Background />

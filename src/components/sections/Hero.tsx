@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
 
+import DecryptedText from "@/components/ui/DecryptedText";
+import Shuffle from "@/components/ui/Shuffle";
 import { RetroComputer } from "@/components/sections/RetroComputer";
 import { profile } from "@/data/profile";
 import { stats } from "@/data/stats";
@@ -40,21 +42,51 @@ export function Hero() {
               aria-hidden="true"
               className="size-2 rounded-full bg-rust"
             />
-            <span className="font-mono text-[0.65rem] tracking-[0.18em] text-ink uppercase">
-              {profile.availability}
-            </span>
+            <Shuffle
+              text={profile.availability}
+              tag="span"
+              textAlign="left"
+              shuffleDirection="right"
+              duration={0.45}
+              stagger={0.02}
+              loop
+              loopDelay={3.5}
+              scrambleCharset="#@$%*+="
+              ease="power3.out"
+              className="font-mono text-[0.65rem] tracking-[0.18em] text-ink uppercase"
+            />
           </motion.div>
 
           <motion.h1
             id="home-heading"
             variants={rise}
-            className="mt-7 text-[2.75rem] leading-[0.98] font-bold tracking-tight text-balance text-ink sm:text-6xl lg:text-[4.5rem]"
+            className="mt-7 text-[2.4rem] leading-[1.02] font-bold tracking-tight text-balance text-ink sm:text-5xl lg:text-[3.6rem]"
           >
-            <span className="block">Software</span>
             <span className="block">
-              <span className="text-rust">Engineering</span> Student
+              <DecryptedText
+                text="Hi, Saya Fahri Muhammadani"
+                animateOn="view"
+                sequential
+                revealDirection="center"
+                speed={60}
+                useOriginalCharsOnly
+                delay={350}
+                encryptedClassName="text-ink/30"
+              />
             </span>
-            <span className="block">&amp; Web Developer</span>
+            <span className="mt-2 block">
+              <DecryptedText
+                text="Full-Stack Web Developer"
+                animateOn="view"
+                sequential
+                revealDirection="center"
+                speed={75}
+                useOriginalCharsOnly
+                delay={900}
+                className="text-rust"
+                encryptedClassName="text-rust/30"
+              />
+            </span>
           </motion.h1>
 
           <motion.div
@@ -66,21 +98,6 @@ export function Hero() {
             <span className="h-1 w-5 bg-rust" />
             <span className="h-1 w-8 bg-ochre" />
           </motion.div>
-
-          <motion.p
-            variants={rise}
-            className="mt-6 max-w-xl text-lg leading-relaxed text-pretty text-ink-soft"
-          >
-            {profile.tagline}
-          </motion.p>
-
-          <motion.p
-            variants={rise}
-            className="mt-3 max-w-xl text-base leading-relaxed text-pretty text-ink-soft/85"
-          >
-            I focus on web application development, modern UI, backend and
-            database work, and day-to-day IT support.
-          </motion.p>
 
           <motion.p
             variants={rise}

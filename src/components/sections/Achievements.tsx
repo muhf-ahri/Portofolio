@@ -9,8 +9,8 @@ export function Achievements() {
     <SectionShell id="achievements">
       <SectionHeading
         id="achievements-heading"
-        eyebrow="Beyond the Code"
-        title="Achievements & Activities"
+        eyebrow="Di Balik Kode"
+        title="Pencapaian & Aktivitas"
       />
 
       <div className="mt-12 grid gap-4 sm:mt-14 md:grid-cols-3">

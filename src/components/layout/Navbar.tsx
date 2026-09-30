@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useScroll } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -9,17 +9,22 @@ import { cx } from "@/lib/cx";
 import { EASE } from "@/lib/motion";
 
 export function Navbar() {
-  const { scrollYProgress } = useScroll();
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("home");
+  const [hidden, setHidden] = useState(false);
 
+  // Hide the bar while scrolling down, bring it back on scroll up.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
-    onScroll();
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y > lastY && y > 96 && !open) setHidden(true);
+      else if (y < lastY) setHidden(false);
+      lastY = y;
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [open]);
 
   // One observer for every section beats six scroll handlers.
   useEffect(() => {
@@ -42,7 +47,7 @@ export function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  // Lock the page and close on Escape while the drawer is open.
+  // Lock the page and close on Escape while the nav is open.
   useEffect(() => {
     if (!open) return;
     const previous = document.body.style.overflow;
@@ -58,105 +63,90 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50">
-      <div
-        className={cx(
-          "border-b-2 border-ink bg-paper transition-shadow duration-200",
-          scrolled || open ? "shadow-hard-sm" : "shadow-none",
-        )}
-      >
-        <nav
-          aria-label="Primary"
-          className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-5 sm:h-[4.5rem] sm:px-8 lg:px-10"
+    <motion.header
+      initial={false}
+      animate={{ y: hidden && !open ? "-120%" : 0 }}
+      transition={{ duration: 0.45, ease: EASE }}
+      className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-6 sm:pt-5 lg:px-10"
+    >
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3">
+        {/* Name card: its own floating card, separate from the nav. */}
+        <a
+          href="#home"
+          className="press card flex items-center rounded-[6px] px-4 py-2.5"
         >
-          <a
-            href="#home"
-            className="flex items-center font-semibold tracking-tight"
-          >
-            <span className="font-display text-lg leading-none font-bold tracking-tight text-ink">
-              {profile.name}
-            </span>
-          </a>
+          <span className="font-display text-base leading-none font-bold tracking-tight text-ink sm:text-lg">
+            {profile.name}
+          </span>
+        </a>
 
-          <ul className="hidden items-center gap-1 md:flex">
-            {navLinks.map((link) => (
-              <li key={link.id}>
-                <a
-                  href={`#${link.id}`}
-                  aria-current={active === link.id ? "true" : undefined}
-                  className={cx(
-                    "block rounded-[3px] border-2 px-3.5 py-1.5 text-sm transition-colors duration-150",
-                    active === link.id
-                      ? "border-ink bg-ink text-paper"
-                      : "border-transparent text-ink-soft hover:border-ink hover:text-ink",
-                  )}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+        {/* Nav cluster: the link row lives at the button's own level and grows
+            out of it to the left, so opening feels like the menu unfolding. */}
+        <div className="relative flex items-center justify-end gap-2">
+          <AnimatePresence>
+            {open ? (
+              <motion.nav
+                id="site-nav"
+                aria-label="Utama"
+                initial={{ opacity: 0, scaleX: 0.4, scaleY: 0.6, x: 12 }}
+                animate={{ opacity: 1, scaleX: 1, scaleY: 1, x: 0 }}
+                exit={{ opacity: 0, scaleX: 0.6, scaleY: 0.8, x: 12 }}
+                transition={{ duration: 0.32, ease: EASE }}
+                style={{ transformOrigin: "right center" }}
+                className="card shadow-hard-sm flex rounded-[6px] p-1.5"
+              >
+                <ul className="flex flex-wrap items-center justify-end gap-1 md:flex-nowrap md:gap-1">
+                  {navLinks.map((link, index) => (
+                    <motion.li
+                      key={link.id}
+                      initial={{ opacity: 0, x: 8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 8 }}
+                      transition={{ duration: 0.22, ease: EASE, delay: index * 0.04 }}
+                    >
+                      <a
+                        href={`#${link.id}`}
+                        onClick={() => setOpen(false)}
+                        aria-current={active === link.id ? "true" : undefined}
+                        className={cx(
+                          "block whitespace-nowrap rounded-[4px] border-2 px-3 py-2 text-sm transition-colors duration-150",
+                          active === link.id
+                            ? "border-ink bg-ink text-paper"
+                            : "border-transparent text-ink-soft hover:border-ink hover:text-ink",
+                        )}
+                      >
+                        {link.label}
+                      </a>
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.nav>
+            ) : null}
+          </AnimatePresence>
 
+          {/* Menu / Close: swaps its label and icon, and anchors the nav. */}
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
-            aria-controls="mobile-menu"
-            aria-label={open ? "Close menu" : "Open menu"}
-            className="press grid size-10 place-items-center rounded-[4px] border-2 border-ink bg-card text-ink md:hidden"
+            aria-controls="site-nav"
+            aria-label={open ? "Tutup menu" : "Buka menu"}
+            className="press card relative z-10 flex items-center gap-2 rounded-[6px] px-4 py-2.5 font-mono text-sm tracking-[0.14em] text-ink uppercase"
           >
-            {open ? <X size={18} /> : <Menu size={18} />}
+            {open ? (
+              <>
+                Close
+                <X size={16} aria-hidden="true" />
+              </>
+            ) : (
+              <>
+                Menu
+                <Menu size={16} aria-hidden="true" />
+              </>
+            )}
           </button>
-        </nav>
+        </div>
       </div>
-
-      {/* Scroll progress reads as a printed rule, not a neon bar. */}
-      <motion.div
-        aria-hidden="true"
-        style={{ scaleX: scrollYProgress }}
-        className="h-1 origin-left bg-rust"
-      />
-
-      <AnimatePresence>
-        {open ? (
-          <motion.div
-            id="mobile-menu"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.25, ease: EASE }}
-            className="border-b-2 border-ink bg-paper-2 md:hidden"
-          >
-            <ul className="mx-auto flex w-full max-w-6xl flex-col gap-1.5 px-5 py-5 sm:px-8">
-              {navLinks.map((link, index) => (
-                <motion.li
-                  key={link.id}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.25, ease: EASE, delay: index * 0.04 }}
-                >
-                  <a
-                    href={`#${link.id}`}
-                    onClick={() => setOpen(false)}
-                    aria-current={active === link.id ? "true" : undefined}
-                    className={cx(
-                      "flex items-center justify-between rounded-[4px] border-2 px-4 py-2.5 text-base transition-colors duration-150",
-                      active === link.id
-                        ? "border-ink bg-ink text-paper"
-                        : "border-ink-soft/30 text-ink-soft hover:border-ink hover:text-ink",
-                    )}
-                  >
-                    {link.label}
-                    <span className="font-mono text-[0.65rem] opacity-60">
-                      0{index + 1}
-                    </span>
-                  </a>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

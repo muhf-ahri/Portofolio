@@ -37,18 +37,18 @@ export function Contact() {
         <div>
           <SectionHeading
             id="contact-heading"
-            eyebrow="Contact"
-            title="Let’s Build Something Together"
-            description="Interested in working together or discussing a project? Feel free to reach out."
+            eyebrow="Kontak"
+            title="Mari Membangun Sesuatu Bersama"
+            description="Tertarik bekerja sama atau mendiskusikan sebuah proyek? Jangan ragu untuk menghubungi saya."
           />
 
           <Reveal delay={0.1} className="mt-8">
             <Button
-              href={`mailto:${profile.email}?subject=Hello%20Fahri`}
-              ariaLabel={`Email ${profile.name} at ${profile.email}`}
+              href={`mailto:${profile.email}?subject=Halo%20Fahri`}
+              ariaLabel={`Kirim email ke ${profile.name} di ${profile.email}`}
             >
               <Send size={16} />
-              Get In Touch
+              Hubungi Saya
             </Button>
             <p className="mt-4 text-sm text-ink-soft">{profile.availability}</p>
           </Reveal>

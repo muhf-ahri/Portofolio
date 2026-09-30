@@ -65,11 +65,11 @@ function ProjectAction({
     return (
       <span
         aria-disabled="true"
-        title="Link not published yet — add the URL in src/data/projects.ts"
+        title="Tautan belum diterbitkan — tambahkan URL di src/data/projects.ts"
         className={`${base} cursor-not-allowed border-line-soft bg-paper-2/40 text-ink-soft/60`}
       >
         <Icon size={14} aria-hidden="true" />
-        {children} · soon
+        {children} · segera
       </span>
     );
   }
@@ -92,9 +92,9 @@ export function Projects() {
     <SectionShell id="projects">
       <SectionHeading
         id="projects-heading"
-        eyebrow="Case Studies"
-        title="Featured Projects"
-        description="Academic, internship, and self-initiated work — mostly Laravel and React, with the database design that holds them together."
+        eyebrow="Studi Kasus"
+        title="Proyek Unggulan"
+        description="Karya akademik, magang, dan proyek pribadi — kebanyakan Laravel dan React, dengan desain database yang menyatukannya."
       />
 
       <div className="mt-12 grid gap-5 sm:mt-16 lg:grid-cols-2">
@@ -127,7 +127,7 @@ export function Projects() {
 
                 <div className="mt-6 flex flex-wrap items-center gap-2 pt-1">
                   <ProjectAction href={project.liveUrl} icon={Globe}>
-                    Live Demo
+                    Demo Langsung
                   </ProjectAction>
                   <ProjectAction href={project.repoUrl} icon={GithubIcon}>
                     GitHub

@@ -4,20 +4,20 @@
  */
 export const profile = {
   name: "Fahri Muhammadani",
-  role: "Software Engineering Student & Web Developer",
+  role: "Full-Stack Web Developer",
   tagline:
-    "Building practical, user-focused web applications with modern technologies.",
+    "Membangun aplikasi web yang praktis dan berfokus pada pengguna dengan teknologi modern.",
   about:
-    "I am a Software Engineering student with a strong interest in web application development, software engineering, and modern technology. I am used to building applications with Laravel, React, Next.js, TypeScript, and databases such as MySQL and PostgreSQL.",
+    "Saya mahasiswa Software Engineering dengan minat kuat pada pengembangan aplikasi web, software engineering, dan teknologi modern. Saya terbiasa membangun aplikasi dengan Laravel, React, Next.js, TypeScript, dan database seperti MySQL dan PostgreSQL.",
   focusAreas: [
-    "Web application development",
-    "Modern UI engineering",
-    "Backend & API development",
-    "Database design",
-    "IT support & troubleshooting",
+    "Pengembangan aplikasi web",
+    "Rekayasa UI modern",
+    "Pengembangan backend & API",
+    "Desain database",
+    "Dukungan & pemecahan masalah IT",
   ],
-  location: "Indonesia",
-  availability: "Open to internships, freelance work, and collaboration",
+  location: "Jawa Barat, Indonesia",
+  availability: "Terbuka untuk magang, freelance, dan kolaborasi",
 
   // REPLACE: placeholder handles.
   email: "fahri@example.com",
@@ -28,10 +28,10 @@ export const profile = {
 } as const;
 
 export const navLinks = [
-  { id: "home", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
+  { id: "home", label: "Beranda" },
+  { id: "about", label: "Tentang" },
+  { id: "skills", label: "Keahlian" },
+  { id: "experience", label: "Pengalaman" },
+  { id: "projects", label: "Proyek" },
+  { id: "contact", label: "Kontak" },
 ] as const;

@@ -230,4 +230,23 @@
   .crt-glow {
     text-shadow: 0 0 6px rgb(182 232 122 / 0.55);
   }
+
+  /* ---- Shuffle ----
+     React Bits' strip-scramble. Visibility flips on only when gsap is ready;
+     the consumer's className owns size/type/colour. */
+  .shuffle-parent {
+    display: inline-block;
+    visibility: hidden;
+    will-change: transform;
+  }
+
+  .shuffle-parent.is-ready {
+    visibility: visible;
+  }
+
+  .shuffle-char {
+    display: inline-block;
+    text-align: center;
+    line-height: inherit;
+  }
 }

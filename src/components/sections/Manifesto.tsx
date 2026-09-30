@@ -17,19 +17,19 @@ export function Manifesto() {
             id="manifesto-heading"
             className="font-mono text-[0.7rem] tracking-[0.24em] text-rust uppercase"
           >
-            Philosophy
+            Filosofi
           </p>
 
           <p className="mt-6 max-w-4xl text-2xl leading-[1.25] font-semibold tracking-tight text-balance text-ink sm:text-3xl lg:text-[2.5rem] lg:leading-[1.2]">
-            I build for the person on the other side of the screen —{" "}
+            Saya membangun untuk orang di seberang layar —{" "}
             <span className="text-rust">
-              clear interfaces, honest code, and systems that hold up after
-              handover.
+              antarmuka yang jelas, kode yang jujur, dan sistem yang bertahan
+              lama setelah diserahterimakan.
             </span>
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
-            {["Accessible by default", "Database-first thinking", "Ship, then refine"].map(
+            {["Aksesibel sejak awal", "Pola pikir database-first", "Kirim, lalu perbaiki"].map(
               (item) => (
                 <span
                   key={item}

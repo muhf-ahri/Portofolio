@@ -31,7 +31,7 @@ export const projects: Project[] = [
     slug: "sistem-audit-internas-spi",
     title: "Sistem Audit Internal (SPI)",
     description:
-      "Web application to support internal audit workflows: planning, inspection, finding documentation, follow-up, verification, and internal audit reporting.",
+      "Aplikasi web untuk mendukung alur kerja audit internal: perencanaan, pemeriksaan, dokumentasi temuan, tindak lanjut, verifikasi, dan pelaporan audit internal.",
     tech: ["Laravel", "PHP", "MySQL", "Bootstrap", "Blade"],
     icon: ShieldCheck,
     image: null,
@@ -42,7 +42,7 @@ export const projects: Project[] = [
     slug: "inventory-barang",
     title: "Inventory Barang",
     description:
-      "Web application for managing inventory data in a structured, searchable way — item records, stock tracking, and reporting.",
+      "Aplikasi web untuk mengelola data inventaris secara terstruktur dan mudah dicari — catatan barang, pelacakan stok, dan pelaporan.",
     tech: ["Laravel", "PHP", "MySQL", "Blade", "Bootstrap"],
     icon: ClipboardList,
     image: null,
@@ -53,7 +53,7 @@ export const projects: Project[] = [
     slug: "needbuy",
     title: "NeedBuy",
     description:
-      "A modern marketplace interface built with a strong focus on user experience and responsive layout across breakpoints.",
+      "Antarmuka marketplace modern yang dibangun dengan fokus kuat pada pengalaman pengguna dan layout responsif di berbagai ukuran layar.",
     tech: ["React", "TypeScript", "Tailwind CSS"],
     icon: Store,
     image: null,
@@ -64,7 +64,7 @@ export const projects: Project[] = [
     slug: "anonymous-school-report",
     title: "Anonymous School Report",
     description:
-      "Web-based reporting platform that helps students submit reports in a more structured way, with a React client backed by a Laravel API.",
+      "Platform pelaporan berbasis web yang membantu siswa mengirim laporan secara lebih terstruktur, dengan klien React yang didukung API Laravel.",
     tech: ["React", "TypeScript", "Laravel API", "PostgreSQL"],
     icon: MessageSquareWarning,
     image: null,
@@ -75,7 +75,7 @@ export const projects: Project[] = [
     slug: "todolist",
     title: "ToDoList",
     description:
-      "Task management application developed in both web and Android versions from the same product concept.",
+      "Aplikasi manajemen tugas yang dikembangkan dalam versi web dan Android dari konsep produk yang sama.",
     tech: ["React", "TypeScript", "Laravel", "Java", "XML", "MySQL"],
     icon: ClipboardCheck,
     image: null,
