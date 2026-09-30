@@ -20,10 +20,10 @@ export const profile = {
   availability: "Terbuka untuk magang, freelance, dan kolaborasi",
 
   // REPLACE: placeholder handles.
-  email: "fahri@example.com",
-  github: "https://github.com/fahri",
-  linkedin: "https://www.linkedin.com/in/fahri",
-  instagram: "https://instagram.com/fahri",
+  email: "fahrimuhammadani123@gmail.com",
+  github: "https://github.com/muhf-ahri",
+  linkedin: "https://www.linkedin.com/in/fahri-muhammadani-010519a8/",
+  instagram: "https://instagram.com/muhf_ahri14",
   website: "https://example.com",
 } as const;
 
