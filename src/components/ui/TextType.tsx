@@ -42,6 +42,9 @@ export default function TextType({
   const [lines, setLines] = useState<string[]>(() =>
     reduce ? text.slice() : text.map(() => ""),
   );
+  // The row currently being typed — the caret must follow it, not hang on the
+  // last (still empty) line.
+  const [activeLine, setActiveLine] = useState(() => (reduce ? text.length - 1 : 0));
   const cursorRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -79,6 +82,7 @@ export default function TextType({
           if (cancelled) return;
           line = 0;
           char = 0;
+          setActiveLine(0);
           setLines(source.map(() => ""));
           timeout = setTimeout(tick, initialDelay);
         }, pauseDuration);
@@ -96,6 +100,7 @@ export default function TextType({
         // Line complete: move to the next one immediately.
         line++;
         char = 0;
+        setActiveLine(line);
         timeout = setTimeout(tick, typingSpeed);
       }
     };
@@ -115,7 +120,7 @@ export default function TextType({
       {lines.map((line, i) => (
         <span key={i} className="block">
           {line}
-          {showCursor && i === lines.length - 1 && (
+          {showCursor && i === activeLine && (
             <span
               ref={cursorRef}
               className={cx("text-type__cursor ml-0.5 inline-block", cursorClassName)}

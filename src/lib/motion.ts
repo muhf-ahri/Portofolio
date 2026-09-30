@@ -22,5 +22,5 @@ export const staggerParent = (stagger = 0.08, delay = 0): Variants => ({
   show: { transition: { staggerChildren: stagger, delayChildren: delay } },
 });
 
-/** `once: true` — nothing in a portfolio needs to animate back into view. */
-export const viewportOnce = { once: true, margin: "0px 0px -12% 0px" } as const;
+/** Reserved space for sticky UI when deciding what counts as "in view". */
+export const viewportReveal = { once: false, margin: "0px 0px -10% 0px" } as const;

@@ -7,7 +7,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionShell } from "@/components/ui/SectionShell";
 import { skillGroups } from "@/data/skills";
-import { fadeUp, staggerParent, viewportOnce } from "@/lib/motion";
+import { fadeUp, staggerParent, viewportReveal } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 export function Skills() {
@@ -18,8 +18,8 @@ export function Skills() {
       <SectionHeading
         id="skills-heading"
         eyebrow="Teknologi"
-        title="Perangkat yang Saya Gunakan"
-        description="Satu set yang terpakai, dikelompokkan berdasarkan fungsinya — bukan sekadar daftar logo."
+        title="Keahlian Saya"
+        description="Satu set Teknologi yang terpakai, dikelompokkan berdasarkan fungsinya — bukan sekadar daftar logo."
       />
 
       <div className="mt-12 grid gap-4 sm:mt-16 lg:grid-cols-2">
@@ -46,7 +46,7 @@ export function Skills() {
                 variants={staggerParent(reduce ? 0 : 0.04)}
                 initial="hidden"
                 whileInView="show"
-                viewport={viewportOnce}
+                viewport={viewportReveal}
                 className="mt-4 grid gap-1"
               >
                 {group.items.map(({ name, icon: Icon }) => (

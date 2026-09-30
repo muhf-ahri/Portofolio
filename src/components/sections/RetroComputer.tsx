@@ -345,7 +345,7 @@ export function RetroComputer() {
                   <TextType
                     text={STACK_LINES}
                     loop
-                    typingSpeed={10}
+                    typingSpeed={30}
                     pauseDuration={4000}
                     initialDelay={600}
                     showCursor
