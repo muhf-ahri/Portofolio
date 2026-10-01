@@ -144,14 +144,48 @@
     background-size: 200px 200px;
   }
 
-  /* Flat card: solid fill + solid keyline. No backdrop-filter anywhere. */
+  /* Flat card: solid fill + 1px keyline. Deliberately thin — a 2px rule on
+     every surface stacked up into a heavy, blocky page. No backdrop-filter
+     anywhere. */
   .card {
     background-color: var(--color-card);
-    border: 2px solid var(--color-ink);
+    border: 1px solid var(--color-ink);
     border-radius: var(--radius-card);
+    transition:
+      border-color 150ms steps(2, end),
+      box-shadow 150ms steps(2, end),
+      transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Offset "printed" shadow that collapses on press. */
+  /* Cards that are themselves a link or button lift on hover. The accent rule
+     along the top edge wipes in, and the offset shadow is the same hard print
+     shadow the theme already uses — smaller, so it reads as a lift rather
+     than a second card. */
+  .card-interactive:hover,
+  .card-interactive:focus-within {
+    border-color: var(--color-rust);
+    box-shadow: 0 3px 0 var(--color-rust);
+    transform: translate(-1px, -1px);
+  }
+
+  .card-interactive::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background-color: var(--color-rust);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card-interactive:hover::before,
+  .card-interactive:focus-within::before {
+    transform: scaleX(1);
+  }
+
+  /* Offset "printed" shadow that collapses on press. Buttons and links opt out
+     of the resting shadow with `shadow-none` and only grow one on hover. */
   .press {
     box-shadow: var(--shadow-hard);
     transition:
@@ -167,6 +201,26 @@
   .press:active {
     box-shadow: none;
     transform: translate(4px, 4px);
+  }
+
+  /* Same interaction, no resting shadow — for small controls where a 4px
+     offset would outweigh the control itself. */
+  .press-lift {
+    box-shadow: none;
+    transition:
+      border-color 150ms steps(2, end),
+      box-shadow 150ms steps(2, end),
+      transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .press-lift:hover {
+    box-shadow: 0 3px 0 var(--color-rust);
+    transform: translate(-1px, -1px);
+  }
+
+  .press-lift:active {
+    box-shadow: none;
+    transform: translate(2px, 2px);
   }
 
   /* Hard underline that reads as a printed rule, not a glow. */
@@ -225,48 +279,6 @@
       transparent 1px,
       transparent 3px
     );
-  }
-
-  /* ---- Stat card (Hero) ------------------------------------------------
-     A lighter sibling of `.card`: a 1px keyline instead of 2px, and the hard
-     offset shadow only materialises on hover, so a resting row of stats reads
-     flat and printed rather than heavy. Hover animates border, shadow and an
-     accent rule — no transform, because Framer owns the inline transform on
-     the same element during the entrance and would override it. */
-  .stat-card {
-    background-color: var(--color-card);
-    border: 1px solid var(--color-ink);
-    border-radius: var(--radius-card);
-    /* Hover state is pure CSS so it cannot fight Framer's inline transform
-       on the motion wrapper during the entrance stagger. */
-    transition:
-      border-color 150ms steps(2, end),
-      box-shadow 150ms steps(2, end),
-      transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .stat-card:hover,
-  .stat-card:focus-within {
-    border-color: var(--color-rust);
-    box-shadow: 0 3px 0 var(--color-rust);
-    transform: translate(-1px, -1px);
-  }
-
-  /* Accent rule along the top edge, wiped in on hover. */
-  .stat-card::before {
-    content: "";
-    position: absolute;
-    inset: 0 0 auto 0;
-    height: 3px;
-    background-color: var(--color-rust);
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .stat-card:hover::before,
-  .stat-card:focus-within::before {
-    transform: scaleX(1);
   }
 
   .crt-glow {

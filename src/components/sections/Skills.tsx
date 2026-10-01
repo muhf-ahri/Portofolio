@@ -96,9 +96,9 @@ export function Skills() {
                   {group.items.map(({ name, icon: Icon }) => (
                     <li
                       key={name}
-                      className="group/skill flex items-center gap-3.5 rounded-[4px] border-2 border-transparent px-2.5 py-2 transition-colors duration-150 hover:border-ink hover:bg-ochre/25"
+                      className="group/skill flex items-center gap-3.5 rounded-[4px] border border-transparent px-2.5 py-2 transition-colors duration-150 hover:border-ink hover:bg-ochre/25"
                     >
-                      <span className="grid size-8 shrink-0 place-items-center rounded-[3px] border-2 border-ink bg-card text-rust transition-transform duration-150 group-hover/skill:-rotate-3">
+                      <span className="grid size-8 shrink-0 place-items-center rounded-[3px] border border-ink bg-card text-rust transition-transform duration-150 group-hover/skill:-rotate-3">
                         <Icon size={15} />
                       </span>
                       <span className="text-sm leading-snug text-ink">{name}</span>

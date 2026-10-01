@@ -28,7 +28,7 @@ export function Experience() {
             {/* Square node, not a glowing dot. */}
             <span
               aria-hidden="true"
-              className="absolute top-6 left-0 size-4 rotate-45 border-2 border-ink bg-rust sm:left-1.5"
+              className="absolute top-6 left-0 size-4 rotate-45 border border-ink bg-rust sm:left-1.5"
             />
 
             <Card interactive className="ml-8 p-6 sm:ml-12 sm:p-8">

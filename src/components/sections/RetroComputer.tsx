@@ -181,7 +181,7 @@ function NavKey({
       rel={external ? "noreferrer noopener" : undefined}
       title={label}
       className={cx(
-        "keycap flex h-full w-full items-center justify-center gap-1.5 rounded-[4px] border-2 border-ink px-1",
+        "keycap flex h-full w-full items-center justify-center gap-1.5 rounded-[4px] border border-ink px-1",
         "font-mono text-[0.5rem] leading-none font-semibold tracking-[0.05em] whitespace-nowrap uppercase",
         "shadow-[inset_0_1.5px_0_rgba(255,255,255,0.55),0_2px_0_var(--color-crt-shell-dark)]",
         accent ? "bg-ochre" : "bg-crt-shell",

@@ -59,7 +59,7 @@ function ProjectAction({
   children: string;
 }) {
   const base =
-    "inline-flex items-center gap-1.5 rounded-[3px] border-2 px-3.5 py-2 text-xs font-semibold";
+    "press-lift inline-flex items-center gap-1.5 rounded-[3px] border px-3.5 py-2 text-xs font-semibold";
 
   if (!href) {
     return (
@@ -79,7 +79,7 @@ function ProjectAction({
       href={href}
       target="_blank"
       rel="noreferrer noopener"
-      className={`press ${base} border-ink bg-card text-ink`}
+      className={`${base} border-ink bg-card text-ink`}
     >
       <Icon size={14} aria-hidden="true" />
       {children}

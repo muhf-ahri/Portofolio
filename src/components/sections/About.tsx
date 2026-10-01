@@ -47,7 +47,7 @@ export function About() {
         {highlights.map(({ title, description, icon: Icon }, index) => (
           <Reveal key={title} delay={index * 0.07}>
             <Card interactive className="group flex h-full flex-col gap-4 p-6">
-              <span className="grid size-11 place-items-center rounded-[4px] border-2 border-ink bg-ochre/45 text-ink transition-transform duration-150 group-hover:-rotate-3">
+              <span className="grid size-11 place-items-center rounded-[4px] border border-ink bg-ochre/45 text-ink transition-transform duration-150 group-hover:-rotate-3">
                 <Icon size={19} />
               </span>
               <h3 className="text-base font-semibold text-ink">{title}</h3>

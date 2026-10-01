@@ -64,7 +64,7 @@ export function Contact() {
                   rel={href.startsWith("http") ? "noreferrer noopener" : undefined}
                   className="flex h-full flex-col gap-4 p-5 focus-visible:outline-offset-4 sm:p-6"
                 >
-                  <span className="grid size-11 shrink-0 place-items-center rounded-[4px] border-2 border-ink bg-ochre/40 text-ink transition-transform duration-150 group-hover:-rotate-3">
+                  <span className="grid size-11 shrink-0 place-items-center rounded-[4px] border border-ink bg-ochre/40 text-ink transition-transform duration-150 group-hover:-rotate-3">
                     <Icon size={18} />
                   </span>
                   <span className="min-w-0">

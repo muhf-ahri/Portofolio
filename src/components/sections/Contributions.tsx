@@ -96,8 +96,12 @@ export function Contributions() {
       <Reveal>
         <div className="mt-10 grid gap-3 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
           {tiles.map(({ icon: Icon, label, value }) => (
-            <Card key={label} className="flex flex-col gap-1 px-4 py-3.5 shadow-hard-sm">
-              <span className="flex items-center gap-1.5 text-[0.7rem] leading-tight text-ink-soft">
+            <Card
+              key={label}
+              interactive
+              className="group flex flex-col gap-1 px-4 py-3.5"
+            >
+              <span className="flex items-center gap-1.5 text-[0.7rem] leading-tight text-ink-soft transition-colors duration-150 group-hover:text-ink">
                 <Icon size={13} aria-hidden="true" />
                 {label}
               </span>
@@ -105,7 +109,7 @@ export function Contributions() {
                 to={value}
                 duration={1.4}
                 minIntegerDigits={2}
-                className="font-display text-2xl leading-none font-bold tracking-tight text-rust sm:text-3xl"
+                className="font-display text-2xl leading-none font-bold tracking-tight text-rust transition-colors duration-150 group-hover:text-rust-bright sm:text-3xl"
               />
             </Card>
           ))}
@@ -122,7 +126,7 @@ export function Contributions() {
               href={`https://github.com/${username}`}
               target="_blank"
               rel="noreferrer noopener"
-              className="press rounded-[4px] border-2 border-ink bg-card px-3 py-1 font-mono text-[0.65rem] tracking-[0.14em] text-ink uppercase"
+              className="press-lift rounded-[4px] border border-ink bg-card px-3 py-1 font-mono text-[0.65rem] tracking-[0.14em] text-ink uppercase transition-colors duration-150 hover:border-rust"
             >
               @{username}
             </a>

@@ -37,7 +37,7 @@ export function Hero() {
         <motion.div variants={staggerParent(reduce ? 0 : 0.08)} initial="hidden" animate="show">
           <motion.div
             variants={rise}
-            className="inline-flex items-center gap-2 rounded-full border-2 border-ink bg-ochre/40 px-3 py-1.5"
+            className="inline-flex items-center gap-2 rounded-full border border-ink bg-ochre/40 px-3 py-1.5"
           >
             <span
               aria-hidden="true"
@@ -114,7 +114,7 @@ export function Hero() {
           >
             {stats.map(({ value, label }) => (
               <motion.div key={label} variants={fadeUp}>
-                <div className="stat-card group relative flex h-full flex-col overflow-hidden px-4 py-3.5">
+                <div className="card card-interactive group flex h-full flex-col overflow-hidden px-4 py-3.5">
                   <dt className="order-2 mt-1.5 text-[0.7rem] leading-tight text-ink-soft transition-colors duration-150 group-hover:text-ink">
                     {label}
                   </dt>

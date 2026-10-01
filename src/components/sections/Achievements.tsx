@@ -17,7 +17,7 @@ export function Achievements() {
         {achievements.map(({ title, description, meta, icon: Icon }, index) => (
           <Reveal key={title} delay={index * 0.08} className="h-full">
             <Card interactive className="flex h-full items-start gap-4 p-5 sm:p-6">
-              <span className="grid size-10 shrink-0 place-items-center rounded-[3px] border-2 border-ink bg-olive/25 text-ink">
+              <span className="grid size-10 shrink-0 place-items-center rounded-[3px] border border-ink bg-olive/25 text-ink">
                 <Icon size={17} />
               </span>
               <div className="min-w-0">

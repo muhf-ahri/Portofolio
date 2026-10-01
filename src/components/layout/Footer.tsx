@@ -16,7 +16,7 @@ export function Footer() {
           target="_blank"
           rel="noreferrer noopener"
           aria-label={`${profile.name} on GitHub`}
-          className="press grid size-10 place-items-center rounded-[4px] border-2 border-ink bg-card text-ink"
+          className="press-lift grid size-10 place-items-center rounded-[4px] border border-ink bg-card text-ink"
         >
           <GithubIcon size={17} />
         </a>

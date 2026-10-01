@@ -3,19 +3,17 @@ import type { ComponentPropsWithRef } from "react";
 import { cx } from "@/lib/cx";
 
 type CardProps = ComponentPropsWithRef<"div"> & {
-  /** Lift + deepen the offset shadow on hover. Zero JS — CSS only. */
+  /** Lift on hover: accent rule wipes in and the keyline goes rust. */
   interactive?: boolean;
-  /** 2px keyline instead of the default 1px rule. */
-  strong?: boolean;
 };
 
 /**
  * Server component. The whole treatment is CSS, so cards ship no JavaScript.
- * 70s print look: solid fill, hard keyline, hard offset shadow, no blur.
+ * Thin keyline, solid fill, and a small hard offset shadow that only appears
+ * on hover — the 70s print look without the page turning blocky.
  */
 export function Card({
   interactive = false,
-  strong = true,
   className,
   ...rest
 }: CardProps) {
@@ -23,9 +21,7 @@ export function Card({
     <div
       className={cx(
         "card",
-        !strong && "border",
-        interactive &&
-          "press hover:border-ink focus-within:border-rust motion-reduce:transition-none",
+        interactive && "card-interactive relative overflow-hidden",
         className,
       )}
       {...rest}

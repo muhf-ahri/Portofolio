@@ -76,7 +76,7 @@ export function Navbar() {
         {/* Name card: its own floating card, separate from the nav. */}
         <a
           href="#home"
-          className="press card flex items-center rounded-[6px] px-4 py-2.5"
+          className="card card-interactive relative flex items-center rounded-[6px] px-4 py-2.5"
         >
           <span className="font-display text-base leading-none font-bold tracking-tight text-ink sm:text-lg">
             {profile.name}
@@ -96,7 +96,7 @@ export function Navbar() {
                 exit={{ opacity: 0, scaleX: 0.6, scaleY: 0.8, x: 12 }}
                 transition={{ duration: 0.32, ease: EASE }}
                 style={{ transformOrigin: "right center" }}
-                className="card shadow-hard-sm flex rounded-[6px] p-1.5"
+                className="card flex rounded-[6px] p-1.5"
               >
                 <ul className="flex flex-wrap items-center justify-end gap-1 md:flex-nowrap md:gap-1">
                   {navLinks.map((link, index) => (
@@ -112,7 +112,7 @@ export function Navbar() {
                         onClick={() => setOpen(false)}
                         aria-current={active === link.id ? "true" : undefined}
                         className={cx(
-                          "block whitespace-nowrap rounded-[4px] border-2 px-3 py-2 text-sm transition-colors duration-150",
+                          "block whitespace-nowrap rounded-[4px] border px-3 py-2 text-sm transition-colors duration-150",
                           active === link.id
                             ? "border-ink bg-ink text-paper"
                             : "border-transparent text-ink-soft hover:border-ink hover:text-ink",
@@ -134,7 +134,7 @@ export function Navbar() {
             aria-expanded={open}
             aria-controls="site-nav"
             aria-label={open ? "Tutup menu" : "Buka menu"}
-            className="press card relative z-10 flex items-center gap-2 rounded-[6px] px-4 py-2.5 font-mono text-sm tracking-[0.14em] text-ink uppercase"
+            className="card card-interactive relative z-10 flex items-center gap-2 overflow-hidden rounded-[6px] px-4 py-2.5 font-mono text-sm tracking-[0.14em] text-ink uppercase"
           >
             {open ? (
               <>
