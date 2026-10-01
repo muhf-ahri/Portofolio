@@ -1,6 +1,7 @@
 import { About } from "@/components/sections/About";
 import { Achievements } from "@/components/sections/Achievements";
 import { Contact } from "@/components/sections/Contact";
+import { Contributions } from "@/components/sections/Contributions";
 import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
 import { Manifesto } from "@/components/sections/Manifesto";
@@ -17,6 +18,7 @@ export default function Page() {
       <Experience />
       <Projects />
       <Achievements />
+      <Contributions />
       <Contact />
     </>
   );

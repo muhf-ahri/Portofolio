@@ -22,7 +22,7 @@ export const profile = {
   // REPLACE: placeholder handles.
   email: "fahrimuhammadani123@gmail.com",
   github: "https://github.com/muhf-ahri",
-  linkedin: "https://www.linkedin.com/in/fahri-muhammadani-010519a8/",
+  linkedin: "https://www.linkedin.com/in/fahri-muhammadani-0105193a8/",
   instagram: "https://instagram.com/muhf_ahri14",
   website: "https://example.com",
 } as const;

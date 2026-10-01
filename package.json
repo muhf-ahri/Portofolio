@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx tests/scroll.test.ts"
+    "test": "tsx tests/scroll.test.ts",
+    "contributions": "node scripts/fetch-contributions.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

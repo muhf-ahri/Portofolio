@@ -9,7 +9,7 @@ import Shuffle from "@/components/ui/Shuffle";
 import { RetroComputer } from "@/components/sections/RetroComputer";
 import { profile } from "@/data/profile";
 import { stats } from "@/data/stats";
-import { EASE, staggerParent } from "@/lib/motion";
+import { EASE, fadeUp, staggerParent } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 export function Hero() {
@@ -109,26 +109,25 @@ export function Hero() {
           </motion.p>
 
           <motion.dl
-            variants={rise}
+            variants={staggerParent(reduce ? 0 : 0.06)}
             className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4"
           >
             {stats.map(({ value, label }) => (
-              <div
-                key={label}
-                className="card flex flex-col px-4 py-3.5 shadow-hard-sm"
-              >
-                <dt className="order-2 mt-1.5 text-[0.7rem] leading-tight text-ink-soft">
-                  {label}
-                </dt>
-                <dd className="order-1 leading-none">
-                  <CountUp
-                    to={value}
-                    duration={1.4}
-                    minIntegerDigits={2}
-                    className="font-display text-2xl font-bold tracking-tight text-rust sm:text-3xl"
-                  />
-                </dd>
-              </div>
+              <motion.div key={label} variants={fadeUp}>
+                <div className="stat-card group relative flex h-full flex-col overflow-hidden px-4 py-3.5">
+                  <dt className="order-2 mt-1.5 text-[0.7rem] leading-tight text-ink-soft transition-colors duration-150 group-hover:text-ink">
+                    {label}
+                  </dt>
+                  <dd className="order-1 leading-none">
+                    <CountUp
+                      to={value}
+                      duration={1.4}
+                      minIntegerDigits={2}
+                      className="font-display text-2xl font-bold tracking-tight text-rust transition-colors duration-150 group-hover:text-rust-bright sm:text-3xl"
+                    />
+                  </dd>
+                </div>
+              </motion.div>
             ))}
           </motion.dl>
         </motion.div>

@@ -13,12 +13,18 @@ export function Navbar() {
   const [active, setActive] = useState<string>("home");
   const [hidden, setHidden] = useState(false);
 
-  // Hide the bar while scrolling down, bring it back on scroll up.
+  // Hide the bar while scrolling down, bring it back on scroll up. Any scroll
+  // while the menu is open dismisses it — otherwise an open panel would hang
+  // over whatever section the reader just landed on.
   useEffect(() => {
     let lastY = window.scrollY;
     const onScroll = () => {
       const y = window.scrollY;
-      if (y > lastY && y > 96 && !open) setHidden(true);
+      if (y === lastY) return;
+      // Scrolling dismisses an open menu, and the bar then follows its normal
+      // rule for that direction — down hides, up brings it back.
+      if (open) setOpen(false);
+      if (y > lastY && y > 96) setHidden(true);
       else if (y < lastY) setHidden(false);
       lastY = y;
     };
@@ -47,19 +53,16 @@ export function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  // Lock the page and close on Escape while the nav is open.
+  // Close on Escape while the nav is open. The page is deliberately NOT
+  // scroll-locked: an open menu that freezes the page is a trap, and here the
+  // nav sits in normal flow at the top, so scrolling past it must still work.
   useEffect(() => {
     if (!open) return;
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") setOpen(false);
     };
     window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = previous;
-      window.removeEventListener("keydown", onKey);
-    };
+    return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
   return (

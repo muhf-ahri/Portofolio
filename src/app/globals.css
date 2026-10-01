@@ -227,6 +227,48 @@
     );
   }
 
+  /* ---- Stat card (Hero) ------------------------------------------------
+     A lighter sibling of `.card`: a 1px keyline instead of 2px, and the hard
+     offset shadow only materialises on hover, so a resting row of stats reads
+     flat and printed rather than heavy. Hover animates border, shadow and an
+     accent rule — no transform, because Framer owns the inline transform on
+     the same element during the entrance and would override it. */
+  .stat-card {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-ink);
+    border-radius: var(--radius-card);
+    /* Hover state is pure CSS so it cannot fight Framer's inline transform
+       on the motion wrapper during the entrance stagger. */
+    transition:
+      border-color 150ms steps(2, end),
+      box-shadow 150ms steps(2, end),
+      transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .stat-card:hover,
+  .stat-card:focus-within {
+    border-color: var(--color-rust);
+    box-shadow: 0 3px 0 var(--color-rust);
+    transform: translate(-1px, -1px);
+  }
+
+  /* Accent rule along the top edge, wiped in on hover. */
+  .stat-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background-color: var(--color-rust);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .stat-card:hover::before,
+  .stat-card:focus-within::before {
+    transform: scaleX(1);
+  }
+
   .crt-glow {
     text-shadow: 0 0 6px rgb(182 232 122 / 0.55);
   }
@@ -260,47 +302,107 @@
     opacity: 1;
   }
 
-  /* ---- OptionWheel (React Bits) ------------------------------------------
-     The rAF loop writes each item's transform/opacity/filter inline; only the
-     anchors below come from CSS. Font styling is inherited from the page so
-     the wheel uses the site's fonts instead of a hardcoded bare sans. */
-  .option-wheel {
-    --ow-text-color: #a6a6a6;
-    --ow-active-color: #ffffff;
-    --ow-font-size: 3rem;
-    --ow-inset: 80px;
+  /* ---- LineSidebar (React Bits) -----------------------------------------
+     The rAF loop writes one custom property per item (`--effect`, 0..1); all
+     colour, shift and scale come from here so the hover/proximity response
+     stays on the compositor. Colours arrive as CSS variables from the caller,
+     which keeps the retro palette in one place. */
+  .line-sidebar {
+    --ls-accent: var(--color-rust);
+    --ls-text: var(--color-ink);
+    --ls-marker: var(--color-ink-soft);
+    --ls-marker-length: 60px;
+    --ls-marker-gap: 0px;
+    --ls-tick-scale: 0.5;
+    --ls-max-shift: 30px;
+    --ls-item-gap: 20px;
+    --ls-font-size: 1.1rem;
 
     position: relative;
-    overflow: hidden;
-    user-select: none;
-    outline: none;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: calc(var(--ls-marker-length) + var(--ls-marker-gap));
   }
 
-  .option-wheel--dragging {
-    cursor: grabbing;
+  .line-sidebar__list {
+    list-style: none;
+    margin: 0;
+    padding: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--ls-item-gap);
   }
 
-  .option-wheel__item {
+  .line-sidebar__item {
+    position: relative;
+    cursor: pointer;
+    /* Uniform line box whether resting or active, so the row heights never
+       change and the list cannot reflow as the selection moves. */
+    min-height: calc(var(--ls-font-size) * 1.2);
+  }
+
+  /* Widens the hit area without shifting the layout. */
+  .line-sidebar__item::before {
+    content: "";
+    position: absolute;
+    inset: -0.375rem -3rem;
+  }
+
+  .line-sidebar__marker {
     position: absolute;
     top: 50%;
-    left: var(--ow-inset);
-    white-space: nowrap;
-    font-size: var(--ow-font-size);
-    line-height: 1;
-    font-weight: 200;
+    left: calc(-1 * (var(--ls-marker-length) + var(--ls-marker-gap)));
+    height: 1px;
+    width: var(--ls-marker-length);
     transform-origin: left center;
-    cursor: pointer;
-    will-change: transform, opacity, filter;
-    color: color-mix(in srgb, var(--ow-active-color) calc(var(--ow-p, 0) * 100%), var(--ow-text-color));
+    transform: translateY(-50%) scaleX(calc(0.7 + var(--effect, 0) * 0.5));
+    background-color: color-mix(
+      in srgb,
+      var(--ls-accent) calc(var(--effect, 0) * 100%),
+      var(--ls-marker)
+    );
   }
 
-  .option-wheel--right .option-wheel__item {
-    left: auto;
-    right: var(--ow-inset);
-    transform-origin: right center;
+  /* Half-length tick in the gap below each item, like a ruler. */
+  .line-sidebar__item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: calc(100% + var(--ls-item-gap) / 2);
+    left: calc(-1 * (var(--ls-marker-length) + var(--ls-marker-gap)));
+    height: 1px;
+    width: calc(var(--ls-marker-length) * var(--ls-tick-scale));
+    transform-origin: left center;
+    transform: translateY(-50%) scaleX(calc(0.7 + var(--effect, 0) * 0.6));
+    background-color: var(--ls-marker);
+    opacity: 0.5;
   }
 
-  .option-wheel__item--selected {
+  .line-sidebar__label {
+    display: inline-flex;
+    align-items: baseline;
+    line-height: 1.2;
+    font-size: var(--ls-font-size);
     font-weight: 500;
+    transform: translateX(calc(var(--effect, 0) * var(--ls-max-shift)));
+    /* Isolated so the transform gets its own layer and the row never
+       re-measures as the selection moves. */
+    will-change: transform;
+    color: color-mix(
+      in srgb,
+      var(--ls-accent) calc(var(--effect, 0) * 100%),
+      var(--ls-text)
+    );
   }
+
+  .line-sidebar__index {
+    margin-right: 0.6rem;
+    font-family: var(--font-space-mono);
+    font-size: 0.85em;
+    opacity: calc(0.55 + var(--effect, 0) * 0.45);
+  }
+
+  /* The active row is marked by colour and marker length only — never by
+     weight. Any weight change widens every glyph's advance, so the active
+     row would read as "bigger" and the list would reflow as the selection
+     moves. Those two channels cost the layout nothing. */
 }
